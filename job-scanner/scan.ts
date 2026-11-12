@@ -14,6 +14,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { sendDigestEmail } from "./notify.js";
+import { classifyTitle, isFresh, isNewGradRole, locationIsUS, MAX_AGE_DAYS } from "./filters.js";
 
 const DIR = path.dirname(fileURLToPath(import.meta.url));
 // Explicit path — dotenv's auto-load only checks the current working
@@ -26,80 +27,7 @@ const RESULTS_DIR = path.join(DIR, "results");
 
 const CONCURRENCY = 15;
 
-// ── Title filter — exact lists as given, not merged with anything else ──
-
-const INCLUDE_KEYWORDS = [
-  "new grad", "new-grad", "university grad", "early career",
-  "entry level", "entry-level", "associate software", "campus",
-  "class of 2026", "recent graduate",
-  "software engineer i", "software engineer 1", "sde i", "sde 1",
-  "swe i", "swe 1", "software developer", "full stack",
-  "full-stack", "fullstack", "backend engineer", "back-end engineer",
-  "application developer", "graduate software",
-];
-
-const EXCLUDE_KEYWORDS = [
-  "senior", "sr.", "staff", "principal", "lead ", "manager",
-  "director", "architect", "ii", "iii", "iv", " v ", "2+ years", "3+ years","2027",
-  "5+ years", "7+ years", "10+ years",
-];
-
-// Word-boundary matching, not raw substring — plain .includes() lets
-// "software engineer i" match "...engineer Intern" (the "i" from Intern)
-// and lets exclude keyword "iv" match inside "Executive"/"Innovative".
-// Trimming keywords first (so "lead " / " v " become "lead" / "v") then
-// wrapping in \b...\b fixes both without changing the keyword lists.
-function toWordBoundaryRegex(keyword: string): RegExp {
-  const escaped = keyword.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  return new RegExp(`\\b${escaped}\\b`, "i");
-}
-
-const INCLUDE_PATTERNS = INCLUDE_KEYWORDS.map(toWordBoundaryRegex);
-const EXCLUDE_PATTERNS = EXCLUDE_KEYWORDS.map(toWordBoundaryRegex);
-
-function titleMatches(title: string): boolean {
-  const included = INCLUDE_PATTERNS.some((r) => r.test(title));
-  const excluded = EXCLUDE_PATTERNS.some((r) => r.test(title));
-  return included && !excluded;
-}
-
-// ── Location filter — block non-US, benefit-of-doubt on empty/ambiguous ──
-// An empty location field (real ATS boards do this even for genuine US
-// roles — see Stripe's "N/A" entries) isn't treated as foreign; only an
-// explicit non-US country/city name blocks a posting. Word-boundary
-// matching avoids collisions like "Georgia" (US state) never being listed
-// here, and "UK"/"US" style short codes not accidentally matching inside
-// unrelated words.
-
-const LOCATION_BLOCK_KEYWORDS = [
-  "india", "bengaluru", "pune", "hyderabad", "mumbai", "delhi",
-  "united kingdom", "uk", "london",
-  "germany", "berlin", "munich",
-  "france", "paris",
-  "poland", "warsaw",
-  "switzerland", "zurich",
-  "spain", "madrid", "barcelona",
-  "netherlands", "amsterdam",
-  "sweden", "stockholm",
-  "austria", "vienna",
-  "ireland", "dublin",
-  "singapore",
-  "japan", "tokyo",
-  "south korea", "seoul",
-  "china", "beijing", "shanghai", "guangzhou", "hong kong",
-  "brazil",
-  "mexico",
-  "australia", "sydney",
-  "canada", "toronto", "montreal", "montréal", "vancouver",
-  "emea", "apac", "latam",
-];
-
-const LOCATION_BLOCK_PATTERNS = LOCATION_BLOCK_KEYWORDS.map(toWordBoundaryRegex);
-
-function locationIsUS(location: string): boolean {
-  if (!location) return true; // benefit of the doubt — many real US postings omit location
-  return !LOCATION_BLOCK_PATTERNS.some((r) => r.test(location));
-}
+// ── Filters live in filters.ts (scored by evals/run_eval.ts) ──
 
 // ── Types ─────────────────────────────────────────────────────────────
 
@@ -292,6 +220,7 @@ async function main() {
   let totalFound = 0;
   let totalFilteredTitle = 0;
   let totalFilteredLocation = 0;
+  let totalFilteredAge = 0;
   let totalFilteredBody = 0;
   let totalDupes = 0;
   const errors: { company: string; error: string }[] = [];
@@ -307,7 +236,8 @@ async function main() {
     }
     totalFound += jobs.length;
     for (const job of jobs) {
-      if (!titleMatches(job.title)) {
+      // Cheap title check first, so Greenhouse descriptions are only fetched for plausible roles.
+      if (classifyTitle(job.title) === "reject") {
         totalFilteredTitle++;
         continue;
       }
@@ -315,21 +245,23 @@ async function main() {
         totalFilteredLocation++;
         continue;
       }
-      // Experience-level gates ("3+ years") almost never show up in the
-      // title — they live in the qualifications section of the body.
-      // Ashby/Lever already gave us descriptionPlain for free; Greenhouse's
-      // list endpoint doesn't include it, so backfill it here, but only for
-      // candidates that already cleared title+location (cheap — a few
-      // hundred requests a day, not one per posting across all companies).
+      if (!isFresh(job.postedAt)) {
+        totalFilteredAge++;
+        continue;
+      }
+      // Ashby/Lever include descriptionPlain; Greenhouse's list endpoint
+      // doesn't, so backfill it only for postings that got this far.
       let description = job.description;
       if (!description && job.ghJobId && job.ghSlug) {
         try {
           description = await fetchGreenhouseDescription(job.ghSlug, job.ghJobId);
         } catch {
-          description = ""; // fall back to title-only exclude check
+          description = ""; // no description: generic titles get dropped, new grad titles kept
         }
       }
-      if (EXCLUDE_PATTERNS.some((r) => r.test(description))) {
+      // Years-of-experience check on the description, plus the level rule
+      // for generic titles ("Backend Engineer" needs <2 years or a new grad mention).
+      if (!isNewGradRole(job.title, description)) {
         totalFilteredBody++;
         continue;
       }
@@ -402,7 +334,8 @@ async function main() {
   console.log(`Total postings found:  ${totalFound}`);
   console.log(`Filtered by title:     ${totalFilteredTitle} removed`);
   console.log(`Filtered by location:  ${totalFilteredLocation} removed`);
-  console.log(`Filtered by JD body:   ${totalFilteredBody} removed (e.g. "3+ years" in qualifications)`);
+  console.log(`Filtered by age:       ${totalFilteredAge} removed (older than ${MAX_AGE_DAYS} days)`);
+  console.log(`Filtered by JD body:   ${totalFilteredBody} removed (years required / no level signal)`);
   console.log(`Duplicates (seen):     ${totalDupes} skipped`);
   console.log(`New matches:           ${newJobs.length}`);
   if (!dryRun && !noEmail && newJobs.length > 0) {

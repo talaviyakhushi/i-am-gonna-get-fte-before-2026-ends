@@ -144,3 +144,16 @@
 {"id": 144, "title": "Sr. Software Engineer I", "location": "Remote - US (see posting for locations)", "expected_title": "reject", "expected_us": true}
 {"id": 145, "title": "Tech Operations Associate, New Grad (Mexico)", "location": "Mexico City, Mexico", "expected_title": "reject", "expected_us": false}
 {"id": 146, "title": "Women's Health Physician, Early Career - Studio City, CA - Onsite", "location": "Studio City, California, United States", "expected_title": "reject", "expected_us": true}
+{"id": 147, "title": "VP of Product Engineering", "location": "San Francisco, CA, OR Anywhere in the Continental U.S.", "expected_title": "reject", "expected_us": true}
+{"id": 148, "title": "Associate CQV Engineer", "location": "Austin, TX", "expected_title": "reject", "expected_us": true}
+{"id": 149, "title": "Junior Mechatronics Engineer", "location": "San Francisco", "expected_title": "reject", "expected_us": true}
+{"id": 150, "title": "IT Engineer", "location": "Los Angeles", "expected_title": "reject", "expected_us": true}
+{"id": 151, "title": "Test Engineer I - RF/EMC", "location": "Tysons, Virginia", "expected_title": "reject", "expected_us": true}
+{"id": 152, "title": "Industrialization Engineer", "location": "Mountain View, CA, USA; Novi, MI, USA", "expected_title": "reject", "expected_us": true}
+{"id": 153, "title": "Associate GTM Engineer", "location": "New York, New York", "expected_title": "reject", "expected_us": true}
+{"id": 154, "title": "Data Engineer - MoneyLion", "location": "MYS - Kuala Lumpur", "expected_title": "generic", "expected_us": false}
+{"id": 155, "title": "Associate Database Engineer", "location": "Zielona Gora, PL", "expected_title": "newgrad", "expected_us": false}
+{"id": 156, "title": "Software Engineer I, Fullstack (Search)", "location": "Remote US", "expected_title": "newgrad", "expected_us": true}
+{"id": 157, "title": "Compiler Engineer - New Grad", "location": "Austin, Texas, United States; San Jose, California, United States", "expected_title": "newgrad", "expected_us": true}
+{"id": 158, "title": "Machine Learning Engineer, New Grad - Quora (Remote)", "location": "Remote - Multiple Locations", "expected_title": "newgrad", "expected_us": true}
+{"id": 159, "title": "Software Engineer - Entra ID", "location": "Palo Alto, CA", "expected_title": "generic", "expected_us": true}

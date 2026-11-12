@@ -17,9 +17,10 @@
 // Stack words (backend, frontend, full-stack) alone don't make a role: "Full-Stack Creator" isn't one.
 // Titles like "Backend Engineer" still pass via "engineer".
 const ROLE = /\b(software|engineer|engineering|developer|swe|sde|machine learning)\b/i;
-const NOT_SWE = /\b(sales|recruit\w*|account executive|accounting|clerk|customer|(customer|technical) support|support (specialist|analyst|representative|engineer)|marketing|counsel|legal|business development|designer|mechanical|electrical|hardware|civil|chemical|manufacturing|solutions engineer|field engineer|sales engineer|analyst)\b/i;
-const NOT_LEVEL = /\b(senior|sr\.?|staff|principal|lead|manager|director|head|architect|founding|experienced|seniority|intern|internship|co-?op|ii|iii|iv|phd)\b/i;
-const NEW_GRAD = /\b(new[- ]?grads?|new graduate|university grad(uate)?|college grad(uate)?|recent grad(uate)?|early[- ]career|entry[- ]level|junior|jr\.?|associate|campus|class of 202[67]|202[67] start|(engineer|developer|swe|sde)\s*,?\s*(i|1))\b/i;
+const NOT_SWE = /\b(sales|recruit\w*|account executive|accounting|clerk|customer|(customer|technical) support|support (specialist|analyst|representative|engineer)|marketing|counsel|legal|business development|designer|mechanical|electrical|hardware|civil|chemical|manufacturing|solutions engineer|field engineer|sales engineer|analyst|cqv|industrialization|mechatronics|commissioning|escalation|gtm|rf|emc|it engineer|product design|enablement)\b/i;
+// 2027: roles for the class of 2027 are out of scope (kept from the original scan.ts exclude list).
+const NOT_LEVEL = /\b(senior|sr\.?|staff|principal|lead|manager|director|head|architect|founding|experienced|seniority|intern|internship|co-?op|ii|iii|iv|phd|2027|vp|vice president|chief)\b/i;
+const NEW_GRAD = /\b(new[- ]?grads?|new graduate|university grad(uate)?|college grad(uate)?|recent grad(uate)?|early[- ]career|entry[- ]level|junior|jr\.?|associate|campus|class of 2026|2026 start|(engineer|developer|swe|sde)\s*,?\s*(i|1))\b/i;
 
 export type TitleVerdict = "newgrad" | "generic" | "reject";
 
@@ -55,7 +56,7 @@ export function isNewGradRole(title: string, description: string): boolean {
   return years !== null && years < 2;
 }
 
-const NON_US = /\b(india|bengaluru|bangalore|pune|hyderabad|mumbai|delhi|chennai|united kingdom|uk|london|ireland|dublin|germany|berlin|munich|france|paris|poland|warsaw|krakow|switzerland|zurich|spain|madrid|barcelona|portugal|lisbon|netherlands|amsterdam|sweden|stockholm|norway|oslo|denmark|copenhagen|finland|austria|vienna|hungary|budapest|bulgaria|sofia|romania|bucharest|czech|prague|serbia|belgrade|ukraine|estonia|israel|tel aviv|singapore|japan|tokyo|korea|seoul|china|beijing|shanghai|shenzhen|hong kong|taiwan|taipei|philippines|manila|vietnam|indonesia|australia|sydney|melbourne|new zealand|canada|toronto|montreal|montréal|vancouver|ontario|mexico|brazil|são paulo|sao paulo|argentina|colombia|bogota|chile|uae|dubai|ind|emea|apac|latam)\b/i;
+const NON_US = /\b(india|bengaluru|bangalore|pune|hyderabad|mumbai|delhi|chennai|united kingdom|uk|london|ireland|dublin|germany|berlin|munich|france|paris|poland|warsaw|krakow|switzerland|zurich|spain|madrid|barcelona|portugal|lisbon|netherlands|amsterdam|sweden|stockholm|norway|oslo|denmark|copenhagen|finland|austria|vienna|hungary|budapest|bulgaria|sofia|romania|bucharest|czech|prague|serbia|belgrade|ukraine|estonia|israel|tel aviv|singapore|malaysia|kuala lumpur|mys|zielona gora|japan|tokyo|korea|seoul|china|beijing|shanghai|shenzhen|hong kong|taiwan|taipei|philippines|manila|vietnam|indonesia|australia|sydney|melbourne|new zealand|canada|toronto|montreal|montréal|vancouver|ontario|mexico|brazil|são paulo|sao paulo|argentina|colombia|bogota|chile|uae|dubai|ind|emea|apac|latam)\b/i;
 const US = /\b(united states|usa|u\.s\.|us)\b/i; // "remote" alone is NOT proof of US
 
 export function locationIsUS(location: string): boolean {
