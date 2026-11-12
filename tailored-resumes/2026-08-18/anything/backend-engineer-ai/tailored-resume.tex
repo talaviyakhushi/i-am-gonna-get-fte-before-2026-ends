@@ -1,0 +1,190 @@
+%-------------------------
+% Resume in Latex — canonical template for tailored resumes
+% Fill the double-brace placeholders below (SUMMARY, SKILLS_CATEGORIES,
+% FORTY7_BULLETS, etc.) — see compileTemplate() in
+% apps/api/src/services/tailoring-pipeline.ts for the exact token list.
+% Do not change the preamble, custom commands, spacing, or section order.
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.05in}
+\addtolength{\topmargin}{-.8in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\sloppy
+\setlength{\emergencystretch}{3em}
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-9pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-10pt}]
+
+\pdfgentounicode=1
+
+%--- CUSTOM COMMANDS ---
+\newcommand{\resumeItem}[1]{
+  \item\small{#1\vspace{-3pt}}
+}
+
+\newcommand{\resumeStack}[1]{
+  \vspace{1pt}\item\small{\textit{#1}}\vspace{-6pt}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-3pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-9pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-9pt}
+}
+\newcommand{\resumeExpHeading}[4]{
+  \vspace{-3pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{\large #1} $|$ #2 & \textit{\large #3} \\
+       & {\small #4} \\
+    \end{tabular*}\vspace{-9pt}
+}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in, label=$\bullet$]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-7pt}}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \scshape Khushi Talaviya} \\ \vspace{2pt}
+    \vspace{4pt}
+    \small
+    New York City, NY $|$
+    \small
+    +15516896880 $|$
+    \href{mailto:khushitalaviya0912@gmail.com}{khushitalaviya0912@gmail.com} $|$
+    \href{https://www.linkedin.com/in/khushitalaviya/}{linkedin.com/in/khushitalaviya} $|$
+    \href{https://github.com/talaviyakhushi}{github.com/talaviyakhushi}
+\end{center}
+
+%-----------SUMMARY-----------
+\section{SUMMARY}
+\vspace{5pt}
+\small{M.S. Computer Science graduate from New Jersey Institute of Technology with production software engineering experience. Builds full-stack features spanning Java, Python, TypeScript, JavaScript. Ships production systems end to end, from design through deployment.}
+
+%-----------SKILLS-----------
+\vspace{2pt}
+\section{SKILLS}
+\vspace{5pt}
+\begin{itemize}[leftmargin=0in, label={}]
+\small{\item{
+\textbf{Languages}{: Java, Python, TypeScript, JavaScript, SQL, HTML5, CSS3} \\
+\textbf{Frameworks / Libraries}{: Spring Boot, Spring MVC, JPA/Hibernate, Angular, NestJS, React, FastAPI, Node.js, TailwindCSS, Angular Material, RxJS, NGXS, Zustand, Apollo GraphQL, Spring RestTemplate} \\
+\textbf{Databases}{: MySQL, PostgreSQL, MongoDB, Supabase (pgvector)} \\
+\textbf{Cloud / DevOps}{: AWS (Amplify, EC2, RDS, S3), Docker, GitHub Actions, CI/CD, Cloudinary, Supabase} \\
+\textbf{Testing / Tools}{: JUnit, Git, Maven, Postman, Jira, Figma}
+}}
+\end{itemize}
+\vspace{-10pt}
+
+%-----------EXPERIENCE-----------
+\section{PROFESSIONAL EXPERIENCE}
+\resumeSubHeadingListStart
+\vspace{10pt}
+\resumeExpHeading
+{Software Developer Co-op}{Forty7}{New York, NY}{Jan 2026 -- May 2026}
+\vspace{-13pt}
+\resumeStack{Angular, Spring Boot, MySQL, GPT-4o, AWS, SSR}
+\resumeItemListStart
+  \resumeItem{Shipped a standalone AI-powered pricing tool end-to-end using GPT-4o vision, Angular, Spring Boot, and MySQL, deployed live in production on AWS EC2 and Amplify}
+  \resumeItem{Added a completeness check before calling the AI model, avoiding unnecessary API calls whenever the input data was incomplete, reducing wasted external requests}
+  \resumeItem{Built a third-party tracking integration in Angular, injected into signup flows for both individual and business users, made safe to run during server-side rendering}
+\resumeItemListEnd
+\vspace{10pt}
+\resumeExpHeading
+{Research Assistant}{New Jersey Institute of Technology}{Newark, NJ}{Apr 2025 -- Sep 2025}
+\vspace{-13pt}
+\resumeStack{Spring Boot, REST API, JSON, CORS}
+\resumeItemListStart
+  \resumeItem{Built OutSourceController with 10+ REST endpoints connecting frontend to backend for bulk uploads, document CRUD, keyword management, and client ACL mutations}
+  \resumeItem{Designed JSON-based persistent mappings for client IDs, file metadata, and access permissions, with CORS configured for the Angular development server environment}
+  \resumeItem{Added FileReceiverController — POST /upload port-mapped to server-specific share directories (8080→server1/share1, 8082→server2/share2, etc.) enabling distributed share storage across 4 servers}
+\resumeItemListEnd
+\vspace{10pt}
+\resumeExpHeading
+{Software Engineer Intern}{BNP Paribas}{Mumbai, India}{Jan 2024 -- Jul 2024}
+\vspace{-13pt}
+\resumeStack{Git, Spring Boot, Angular, REST API}
+\resumeItemListStart
+  \resumeItem{Used Git for version control and deployed changes to the dev environment}
+  \resumeItem{Built REST APIs in Spring Boot consumed by an Angular frontend}
+  \resumeItem{Logging workflow used daily by the full 12-person team for Jira tracking}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\vspace{-3pt}
+\section{PROJECTS}
+\resumeSubHeadingListStart
+
+\resumeProjectHeading
+{\textbf{Resume Tailor Agent — AI Job-Application Copilot}}{July 2026}
+\vspace{-9pt}
+\resumeStack{TypeScript, Claude Agent SDK, Express}
+\resumeItemListStart
+  \resumeItem{Built word-boundary keyword matching to filter roles by relevance and U.S. locations, plus a second pass over job description text catching experience requirements missing from titles}
+  \resumeItem{Built a honesty-check service that diffs the generated resume against the original master resume after generation, flagging any claim not traceable back to source material}
+  \resumeItem{pnpm monorepo in TypeScript throughout: Express API, MV3 extension, and a shared types/validation package consumed by both}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+%-----------EDUCATION-----------
+\vspace{-3pt}
+\section{EDUCATION}
+\vspace{1pt}
+\resumeSubHeadingListStart
+\vspace{5pt}
+\resumeSubheading
+{New Jersey Institute of Technology}{May 2026}
+{Master of Science in Computer Science}{Newark, NJ}
+\vspace{5pt}
+\resumeSubheading
+{Mukesh Patel Institute of Management Studies}{May 2024}
+{Bachelor of Science in Computer Science}{India}
+\resumeSubHeadingListEnd
+\end{document}

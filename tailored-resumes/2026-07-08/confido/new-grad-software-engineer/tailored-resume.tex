@@ -1,0 +1,183 @@
+%-------------------------
+% Resume in Latex — canonical template for tailored resumes
+% Fill the SLOT markers with content from tailored-resume.md.
+% Do not change the preamble, custom commands, spacing, or section order.
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.05in}
+\addtolength{\topmargin}{-.8in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\sloppy
+\setlength{\emergencystretch}{3em}
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-9pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-10pt}]
+
+\pdfgentounicode=1
+
+%--- CUSTOM COMMANDS ---
+\newcommand{\resumeItem}[1]{
+  \item\small{#1\vspace{-3pt}}
+}
+
+\newcommand{\resumeStack}[1]{
+  \vspace{1pt}\item\small{\textit{#1}}\vspace{-6pt}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-3pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-9pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-9pt}
+}
+\newcommand{\resumeExpHeading}[4]{
+  \vspace{-3pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{\large #1} $|$ #2 & \textit{\large #3} \\
+       & \text{\small #4} \\
+    \end{tabular*}\vspace{-9pt}
+}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in, label=$\bullet$]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-7pt}}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \scshape Khushi Talaviya} \\ \vspace{2pt}
+    \vspace{4pt}
+    \small
+    New York City, NY $|$
+    \href{mailto:khushitalaviya0912@gmail.com}{khushitalaviya0912@gmail.com} $|$
+    \href{https://www.linkedin.com/in/khushitalaviya/}{linkedin.com/in/khushitalaviya} $|$
+    \href{https://github.com/talaviyakhushi}{github.com/talaviyakhushi}
+\end{center}
+
+%-----------SUMMARY-----------
+\section{SUMMARY}
+\vspace{5pt}
+\small{Full-stack software engineer with hands-on experience building production features across backend, frontend, and data systems. Built AI-driven workflows using OpenAI's vision and language models for document classification, pricing, and retrieval. Eager to learn quickly, take feedback, and grow under experienced engineers in a fast-paced, high-ownership team.}
+
+%-----------SKILLS-----------
+\vspace{2pt}
+\section{SKILLS}
+\vspace{5pt}
+\begin{itemize}[leftmargin=0in, label={}]
+\small{\item{
+\textbf{Languages}{: Java, Python, TypeScript, JavaScript, SQL} \\
+\textbf{Frameworks / Backend}{: NestJS, Spring Boot, FastAPI, Node.js, React, Angular} \\
+\textbf{Databases}{: PostgreSQL, MySQL, MongoDB, AWS RDS} \\
+\textbf{Cloud / DevOps}{: AWS (EC2, S3), Docker, GitHub Actions, CI/CD} \\
+\textbf{Practices}{: Agile/Scrum, REST and GraphQL API design, unit and integration testing}
+}}
+\end{itemize}
+\vspace{-10pt}
+
+%-----------EXPERIENCE-----------
+\section{PROFESSIONAL EXPERIENCE}
+\resumeSubHeadingListStart
+\vspace{10pt}
+\resumeExpHeading
+{Forty7}{Software Developer Co-op}{New York, NY}{Jan 2026 -- May 2026}
+\vspace{-13pt}
+\resumeStack{NestJS, GraphQL, PostgreSQL, gpt-4o Vision}
+\resumeItemListStart
+  \resumeItem{Reached 90\% pricing accuracy on 3,000+ resale items by building an AI estimator with gpt-4o vision classification and a domain-tuned pricing model, live in production.}
+  \resumeItem{Owned a live proxy-bidding feature end-to-end across API, frontend, and admin panel, powering automatic bid resolution in production across 15 lots in NestJS and Angular.}
+  \resumeItem{Fixed broken certificate-data extraction after an upstream API format change, restoring accurate display for live gemstone listings by refactoring response parsing in NestJS and Angular.}
+\resumeItemListEnd
+\vspace{10pt}
+\resumeExpHeading
+{New Jersey Institute of Technology (NJIT)}{Research Assistant}{Newark, NJ}{Apr 2025 -- Sep 2025}
+\vspace{-13pt}
+\resumeStack{Angular, Spring Boot, REST APIs, Maven}
+\resumeItemListStart
+  \resumeItem{Built a full Angular dashboard and 10+ Spring Boot REST endpoints for a document-outsourcing research system, contributing to research validated at 500K-document scale.}
+  \resumeItem{Enabled document distribution across 4 servers by building port-mapped upload endpoints wired into a unified Spring Boot backend.}
+  \resumeItem{Built keyword-based access control letting clients search and retrieve documents through grant/revoke permissions, without exposing extracted content.}
+\resumeItemListEnd
+\vspace{10pt}
+\resumeExpHeading
+{BNP Paribas}{Software Engineer Intern}{Mumbai, India}{Jan 2024 -- Jul 2024}
+\vspace{-13pt}
+\resumeStack{Java, Spring Boot, Angular, JUnit}
+\resumeItemListStart
+  \resumeItem{Delivered 10-12 Jira tickets across backend, frontend, and styling on a legacy system migration to Java Spring Boot, each shipped with automated tests.}
+  \resumeItem{Built an internal Jira-tracking tool from scratch with Spring Boot and Angular, used daily by a 12-person team to replace manual reporting.}
+  \resumeItem{Maintained JUnit unit and integration test coverage across 5 months of Agile sprint delivery on a Java Spring Boot migration.}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\vspace{-3pt}
+\section{PROJECTS}
+\resumeSubHeadingListStart
+
+\resumeProjectHeading
+{\textbf{Outfitted -- AI Personal Styling Assistant} $|$ \href{https://github.com/talaviyakhushi/outfitted}{Link}}{Mar 2026}
+\vspace{-9pt}
+\resumeStack{React, FastAPI, PostgreSQL (pgvector), OpenAI API}
+\resumeItemListStart
+  \resumeItem{Built an AI wardrobe assistant that suggests outfits from photos of a user's own clothes, validated by 10 users who uploaded 500+ items total.}
+  \resumeItem{Powered semantic search over wardrobe items using OpenAI embeddings and vector similarity, retrieving relevant pieces before an AI stylist generates outfit suggestions.}
+  \resumeItem{Streamed AI-generated outfit suggestions in real time via gpt-4o, rendering 5-slot visual collages from a user's actual wardrobe photos.}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+%-----------EDUCATION-----------
+\vspace{-3pt}
+\section{EDUCATION}
+\vspace{1pt}
+\resumeSubHeadingListStart
+\vspace{5pt}
+\resumeSubheading
+{New Jersey Institute of Technology}{May 2026}
+{Master of Science in Computer Science}{Newark, NJ}
+\resumeSubHeadingListEnd
+
+\end{document}
