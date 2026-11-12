@@ -1,0 +1,512 @@
+# Structured candidate profile — machine-readable source of truth.
+# Extracted verbatim from resume.md. Do not add facts not present there.
+# "Bullet variants by role type" and "Derivation" notes from resume.md were
+# intentionally excluded — they are reworded/alternate phrasings of the
+# facts already captured below, not distinct facts. See README note.
+
+personal_info:
+  name: "Khushi Talaviya"
+  email: "khushitalaviya0912@gmail.com"
+  linkedin: "linkedin.com/in/khushitalaviya"
+  github: "github.com/talaviyakhushi"
+  portfolio: "khushitalaviya.vercel.app"
+  location: "New York, NY"
+
+education:
+  - institution: "New Jersey Institute of Technology"
+    location: "Newark, NJ"
+    degree: "M.S. Computer Science"
+    status: "Completed"
+    date: "May 2026"
+    gpa: 3.8
+    # No bachelor's degree present anywhere in resume.md — not added.
+
+technical_skills:
+  languages:
+    - Java
+    - Python
+    - TypeScript
+    - JavaScript
+    - SQL
+    - HTML5
+    - CSS3
+  frameworks_libraries:
+    - Spring Boot
+    - Spring MVC
+    - JPA/Hibernate
+    - Angular
+    - NestJS
+    - React
+    - FastAPI
+    - Node.js
+    - TailwindCSS
+    - Angular Material
+    - RxJS
+    - NGXS
+    - Zustand
+    - Apollo GraphQL
+    - Spring RestTemplate
+  databases:
+    - MySQL
+    - PostgreSQL
+    - MongoDB
+    - Supabase (pgvector)
+  cloud_devops:
+    - AWS (Amplify, EC2, RDS, S3)
+    - Docker
+    - GitHub Actions
+    - CI/CD
+    - Cloudinary
+    - Supabase
+  testing_tools:
+    - JUnit
+    - Git
+    - Maven
+    - Postman
+    - Jira
+    - Figma
+  practices:
+    - Agile/Scrum
+    - unit and integration testing
+  ai_ml:
+    - OpenAI API (GPT-4o, GPT-4o-mini, text-embedding-3-small)
+    - RAG pipelines
+    - vector search (pgvector)
+
+experiences:
+
+  - id: forty7
+    type: work
+    company: "Forty7"
+    role: "Software Developer Co-op"
+    location: "New York, NY"
+    dates: "January 2026 – May 2026"
+    bullets:
+      - id: forty7_1
+        text: "Built a third-party tracking integration in Angular, injected into signup flows for both individual and business users, safe to run during server-side rendering"
+        tags: [Angular, SSR, "third-party integration"]
+        core_action: "Built SSR-safe analytics tracking integration"
+      - id: forty7_2
+        text: "Fixed a NestJS backend bug where a duplicate-signup error was failing silently — fixed by re-routing the user into the existing subscription flow instead"
+        tags: [NestJS, "bug fix"]
+        core_action: "Fixed silent-fail duplicate-signup bug"
+      - id: forty7_3
+        text: "Built a guest identity-resolution flow that attributes analytics events without requiring an authenticated session"
+        tags: [Angular, "guest access", analytics]
+        core_action: "Built guest identity-resolution flow"
+      - id: forty7_4
+        text: "Extended the NestJS backend to support an admin-triggered WhatsApp message, restricted by role and safe to trigger only once per user"
+        tags: [NestJS, "WATI/WhatsApp API", "role-based access"]
+        core_action: "Extended backend for admin-triggered WhatsApp messaging"
+      - id: forty7_5
+        text: "Updated message templates when business requirements changed"
+        tags: ["WATI/WhatsApp API"]
+        core_action: "Updated WhatsApp message templates"
+      - id: forty7_6
+        text: "Surfaced the trigger action in the Angular admin panel's business users table"
+        tags: [Angular, "admin panel"]
+        core_action: "Surfaced WhatsApp trigger in admin UI"
+      - id: forty7_7
+        text: "Reworked auth in Angular so unauthenticated users could browse key pages and interact with core features without logging in"
+        tags: [Angular, "guest access", auth]
+        core_action: "Reworked auth for guest browsing"
+      - id: forty7_8
+        text: "Fixed a state-management race condition where route guards evaluated before login state was ready, causing incorrect redirects on app load"
+        tags: [NGXS, Angular, "race condition", "bug fix"]
+        core_action: "Fixed auth-state race condition in route guards"
+      - id: forty7_9
+        text: "Root cause: state was reset on logout in a way that wiped a readiness flag — fixed by excluding auth state from that reset"
+        tags: [NGXS, "root cause analysis"]
+        core_action: "Root-caused and fixed logout state-reset bug"
+      - id: forty7_10
+        text: "Built the About Us page in Angular with a dynamic carousel driven by an extended GraphQL query, linking each item to its listing"
+        tags: [Angular, "Apollo GraphQL"]
+        core_action: "Built About Us page with dynamic GraphQL carousel"
+      - id: forty7_11
+        text: "Built a new Request Access page and route from scratch"
+        tags: [Angular]
+        core_action: "Built Request Access page from scratch"
+      - id: forty7_12
+        text: "Overhauled markup and layout across four core pages (Auctions/Home, How It Works, Sell With Us, FAQs)"
+        tags: [Angular, SCSS]
+        core_action: "Overhauled markup/layout across 4 core pages"
+      - id: forty7_13
+        text: "Updated navigation to adapt dynamically based on auth and listing state"
+        tags: [Angular]
+        core_action: "Built dynamic auth-aware navigation"
+      - id: forty7_14
+        text: "Added a Results tab to listing pages in Angular, replacing an old auto-redirect with tab-based navigation"
+        tags: [Angular]
+        core_action: "Added Results tab, replacing auto-redirect"
+      - id: forty7_15
+        text: "Fixed a data-mapping bug in NestJS and Angular when an upstream certificate API changed its response format"
+        tags: [NestJS, Angular, "bug fix", "third-party API"]
+        core_action: "Fixed data-mapping bug from upstream API change"
+      - id: forty7_16
+        text: "Fixed a JWT token-signing bug that produced identical session tokens for concurrent logins"
+        tags: [JWT, NestJS, "bug fix", concurrency]
+        core_action: "Fixed JWT token-signing bug under concurrent logins"
+      - id: forty7_17
+        text: "Fixed an inverted filter condition in the admin panel that blocked valid listings and allowed invalid ones"
+        tags: [Angular, "admin panel", "bug fix"]
+        core_action: "Fixed inverted listing-filter condition"
+      - id: forty7_18
+        text: "Built a complete proxy bidding (Max Bid) system end-to-end across a NestJS/GraphQL API, PostgreSQL, and an Angular admin panel, live across the last 3 auctions (15 lots total)"
+        tags: [NestJS, "Apollo GraphQL", PostgreSQL, Angular]
+        core_action: "Built proxy bidding system end-to-end"
+      - id: forty7_19
+        text: "Added validation ensuring only one active max bid per user per lot, with rules preventing conflicts between manual and automated bids"
+        tags: [NestJS, "class-validator", "business logic"]
+        core_action: "Added validation for one active max bid per user/lot"
+      - id: forty7_20
+        text: "Built an automated resolution process that determines and places counter-bids after each new bid, and suppresses redundant notifications for active max-bid holders"
+        tags: [NestJS, "Bull queue", "business logic"]
+        core_action: "Built automated counter-bid resolution process"
+      - id: forty7_21
+        text: "Updated the bid increment rule from a flat 2% to 3%, rounded up to the nearest $100"
+        tags: ["business logic"]
+        core_action: "Updated bid increment rule"
+      - id: forty7_22
+        text: "Added a new PostgreSQL-backed notification type, plus an email and WhatsApp confirmation message, when a max bid is set"
+        tags: [PostgreSQL, "WATI/WhatsApp API", email]
+        core_action: "Added notification type + email/WhatsApp confirmation"
+      - id: forty7_23
+        text: "Extended the Angular bidding UI to toggle between manual and max-bid modes"
+        tags: [Angular]
+        core_action: "Extended bidding UI with manual/max-bid toggle"
+      - id: forty7_24
+        text: "Added a Redis cache layer for frequently-read bid state, cutting repeated database reads during high-frequency bidding"
+        tags: [Redis, PostgreSQL, "performance"]
+        core_action: "Added Redis cache layer for bid state"
+      - id: forty7_25
+        text: "Designed and ran k6 load tests against the proxy bidding feature simulating 1,000 concurrent users with requests roughly 0.1 milliseconds apart, proactively surfacing race conditions before they reached production"
+        tags: [k6, "load testing", concurrency]
+        core_action: "Designed and ran k6 load tests at 1,000-concurrent-user scale"
+      - id: forty7_26
+        text: "Fixed a duplicate-notification bug where proxy bidding and manual bidding both sent outbid alerts to the same user under simultaneous load — deduplicated by tracking who had already been notified"
+        tags: [NestJS, concurrency, "bug fix"]
+        core_action: "Fixed duplicate-notification bug under simultaneous load"
+      - id: forty7_27
+        text: "Fixed a message-ordering bug where outbid alerts could arrive before the bid-accepted confirmation — added a short delay before proxy-bid processing to guarantee correct delivery order across notification channels"
+        tags: [NestJS, concurrency, "bug fix"]
+        core_action: "Fixed message-ordering bug across notification channels"
+      - id: forty7_28
+        text: "Fixed a duplicate-bid bug where simultaneous requests on the same lot could each trigger their own proxy-bid process — assigned each lot's proxy resolution a single job so only one instance runs at a time, guaranteeing exactly-once bid placement under concurrent load"
+        tags: ["Bull queue", concurrency, "bug fix"]
+        core_action: "Fixed duplicate-bid race condition, guaranteed exactly-once placement"
+      - id: forty7_29
+        text: "Root cause affected both data integrity (duplicate bids) and notification correctness — found and fixed through load testing before reaching production"
+        tags: ["root cause analysis", "load testing"]
+        core_action: "Root-caused data-integrity + notification bugs via load testing"
+      - id: forty7_30
+        text: "Built a standalone AI-powered pricing tool end-to-end — Angular, Spring Boot, and MySQL, using GPT-4o vision — live in production on AWS (EC2 and Amplify)"
+        tags: [Angular, "Spring Boot", MySQL, "GPT-4o", AWS]
+        core_action: "Built AI pricing tool end-to-end, live in production"
+      - id: forty7_31
+        text: "Added image deduplication via Cloudinary so the same photo is never processed twice"
+        tags: [Cloudinary]
+        core_action: "Added image dedup via Cloudinary"
+      - id: forty7_32
+        text: "Added a reCAPTCHA verification gate before any AI call"
+        tags: [reCAPTCHA]
+        core_action: "Added reCAPTCHA gate before AI calls"
+      - id: forty7_33
+        text: "Automated deployment via GitHub Actions CI/CD, with separate frontend and backend pipelines"
+        tags: ["GitHub Actions", "CI/CD"]
+        core_action: "Automated deployment via GitHub Actions CI/CD"
+      - id: forty7_34
+        text: "Benchmarked accuracy: 90% against 3,000+ real marketplace listings"
+        tags: ["GPT-4o", benchmarking]
+        core_action: "Benchmarked AI pricing accuracy at 90%"
+      - id: forty7_35
+        text: "Used by ~100 people in production; end-to-end response completes in a few seconds"
+        tags: ["production usage"]
+        core_action: "Shipped tool used by ~100 people in production"
+      - id: forty7_36
+        text: "Added a completeness check before calling the AI model, to avoid unnecessary API calls when input data is incomplete"
+        tags: ["GPT-4o", "cost optimization"]
+        core_action: "Added input-completeness check before AI calls"
+
+  - id: njit_ra
+    type: work
+    company: "New Jersey Institute of Technology"
+    role: "Research Assistant (under Prof. Komal Kumari)"
+    location: "Newark, NJ"
+    dates: "April 2025 – September 2025"
+    bullets:
+      - id: njit_1
+        text: "Built full Angular 15 app from scratch: DBO dashboard + client search interface, routing, service layer, dialogs, data models"
+        tags: [Angular]
+        core_action: "Built full Angular app from scratch"
+      - id: njit_2
+        text: "DBO dashboard: bulk file/directory upload, session-based file visibility (auto-expires 30 min), file add/delete, client ID management"
+        tags: [Angular, "file management"]
+        core_action: "Built DBO dashboard with session-based file visibility"
+      - id: njit_3
+        text: "Keyword management UI: view all extracted keywords post-processing, grant/revoke keyword access per client — Access Control Matrix interaction without exposing internals"
+        tags: [Angular, "access control"]
+        core_action: "Built keyword access-control management UI"
+      - id: njit_4
+        text: "Client search view: keyword-based document search (\"Google search\" style), file open/download visualization"
+        tags: [Angular, search]
+        core_action: "Built keyword-based document search view"
+      - id: njit_5
+        text: "Added OutSourceController — 10+ REST endpoints wiring frontend to backend services: bulk upload with per-client folder organization, document CRUD, keyword management, client-keyword ACL mutations, and system bootstrap/mapping management"
+        tags: ["Spring Boot", "REST API"]
+        core_action: "Built 10+ REST endpoints (OutSourceController)"
+      - id: njit_6
+        text: "Added FileReceiverController — POST /upload port-mapped to server-specific share directories (8080→server1/share1, 8082→server2/share2, etc.) enabling distributed share storage across 4 servers"
+        tags: ["Spring Boot", "distributed systems"]
+        core_action: "Built port-mapped file routing across 4 servers"
+      - id: njit_7
+        text: "JSON-based persistent mappings for client IDs, file metadata, and access permissions; CORS configured for Angular dev server"
+        tags: ["Spring Boot", JSON, CORS]
+        core_action: "Built JSON-based persistence mappings"
+      - id: njit_8
+        text: "Studied provided backend code to understand data shapes and API contracts"
+        tags: ["API design"]
+        core_action: "Studied backend code to understand API contracts"
+      - id: njit_9
+        text: "Wired Angular service layer to live Spring Boot endpoints"
+        tags: [Angular, "Spring Boot"]
+        core_action: "Wired Angular service layer to live backend"
+      - id: njit_10
+        text: "Reorganized codebase: merged outsource + grant-revoke modules into unified DBO package without touching existing logic"
+        tags: ["Spring Boot", refactoring]
+        core_action: "Reorganized codebase into unified DBO package"
+
+  - id: bnp_paribas
+    type: work
+    company: "BNP Paribas"
+    role: "Software Engineer Intern"
+    location: "Mumbai, India"
+    dates: "January 2024 – July 2024"
+    bullets:
+      - id: bnp_1
+        text: "Built internal team productivity tool during onboarding: form-based Jira logging where each team member records Jiras worked on per date"
+        tags: ["Spring Boot", Angular]
+        core_action: "Built internal Jira-logging tool"
+      - id: bnp_2
+        text: "Manager view: aggregated table of all team submissions, exportable (CSV/Excel)"
+        tags: [Angular, "data export"]
+        core_action: "Built manager-facing aggregated export view"
+      - id: bnp_3
+        text: "Full CRUD implementation — create, read, update, delete entries"
+        tags: ["Spring Boot", CRUD]
+        core_action: "Implemented full CRUD for Jira tracker"
+      - id: bnp_4
+        text: "REST APIs built with Spring Boot; Angular frontend consuming them"
+        tags: ["Spring Boot", Angular, "REST API"]
+        core_action: "Built REST API + Angular frontend for internal tool"
+      - id: bnp_5
+        text: "Used by the full 12-person team for daily Jira logging"
+        tags: ["production usage"]
+        core_action: "Tool adopted by full 12-person team"
+      - id: bnp_6
+        text: "Worked on 10–12 Jiras across 5 months: mix of backend logic changes (Java Spring Boot), frontend changes (Angular), and CSS styling fixes"
+        tags: [Java, "Spring Boot", Angular, CSS]
+        core_action: "Delivered 10-12 Jiras across backend/frontend/CSS"
+      - id: bnp_7
+        text: "Each Jira shipped with unit tests (JUnit) + additional test file covering integration or edge cases"
+        tags: [JUnit, testing]
+        core_action: "Shipped unit + integration tests per Jira"
+      - id: bnp_8
+        text: "Participated in sprint planning, daily standups, retrospectives — Agile/Scrum delivery"
+        tags: ["Agile/Scrum"]
+        core_action: "Participated in full Agile/Scrum delivery cycle"
+      - id: bnp_9
+        text: "Used Git for version control; deployed changes to dev environment"
+        tags: [Git]
+        core_action: "Used Git version control, deployed to dev"
+
+  - id: resume_tailor_agent
+    type: project
+    company: null
+    role: "Resume Tailor Agent — AI Job-Application Copilot"
+    location: null
+    dates: "July 2026"
+    bullets:
+      - id: resume_tailor_1
+        text: "Scans 471 companies directly via their own Greenhouse, Lever, and Ashby job-board APIs — no scraping, no guessing at URLs. That company list itself was built by verifying each one's ATS board actually exists with a real HTTP check against roughly 6,500 candidate U.S. employers, not by assuming"
+        tags: ["Greenhouse API", "Lever API", "Ashby API", "Node.js"]
+        core_action: "Built job-board scanning pipeline across 471 verified companies"
+      - id: resume_tailor_2
+        text: "Filters for role relevance and U.S.-only locations using word-boundary keyword matching, avoiding false positives a naive substring match would catch (e.g. \"Software Engineer I\" wrongly matching inside \"Engineer Intern\"), plus a second pass against the full job description text to catch experience-level requirements (\"3+ years\") that never show up in the title"
+        tags: [TypeScript, "keyword matching", filtering]
+        core_action: "Built role-relevance and experience-level filtering"
+      - id: resume_tailor_3
+        text: "Skips postings older than 14 days by reading each posting's own schema.org datePosted field, and skips any posting that explicitly excludes visa sponsorship — both checked before any tailoring effort is spent on it"
+        tags: ["schema.org", filtering]
+        core_action: "Built staleness and visa-sponsorship filtering"
+      - id: resume_tailor_4
+        text: "Backend runs the Claude Agent SDK driven by a markdown rulebook that encodes hard anti-fabrication boundaries, STAR-bullet style rules, and JD-fit heuristics (e.g. ranking which project or bullet to lead with per posting) — the agent reads the rulebook and a master resume file, then writes a tailored .tex resume and fit report per run"
+        tags: ["Claude Agent SDK", "Node.js", "Express"]
+        core_action: "Orchestrated Claude Agent SDK for resume tailoring"
+      - id: resume_tailor_5
+        text: "A honesty-check service diffs the generated resume against the original master resume after generation, flagging any claim not traceable back to source"
+        tags: ["Claude Agent SDK", "TypeScript"]
+        core_action: "Built honesty-check service to catch fabricated claims"
+      - id: resume_tailor_6
+        text: "Content scripts extract job title/company/description from the active tab with per-site selector tables, scoring extraction confidence and letting the user correct low-confidence fields before submitting"
+        tags: ["Chrome Extension", "Manifest V3", "content scripts"]
+        core_action: "Built confidence-scored job-posting extraction"
+      - id: resume_tailor_7
+        text: "Background service worker proxies authenticated API calls (content scripts can't reach localhost directly) and consumes Server-Sent Events manually via a ReadableStream (EventSource can't carry auth headers), persisting run state across popup close/reopen and service-worker recycling"
+        tags: ["Chrome Extension", "Manifest V3", "Server-Sent Events"]
+        core_action: "Built persistent background worker with SSE + auth proxying"
+      - id: resume_tailor_8
+        text: "pnpm monorepo in TypeScript throughout: Express API, MV3 extension, and a shared types/validation package consumed by both"
+        tags: ["pnpm workspaces", TypeScript, Express]
+        core_action: "Built pnpm TypeScript monorepo with shared types package"
+      - id: resume_tailor_9
+        text: "Found and fixed real production bugs surfaced through actual use: a LaTeX template bug that broke every generated resume (missing amsmath import, malformed list-environment nesting) and several agent rule gaps (bullet selection defaulting to the same project every run instead of ranking by JD fit, an AI-branded-company signal wrongly overriding a stronger literal keyword match)"
+        tags: [LaTeX, "bug fix", "Claude Agent SDK"]
+        core_action: "Found and fixed LaTeX + agent-rule production bugs"
+
+  - id: outfitted
+    type: project
+    company: null
+    role: "Outfitted — AI Personal Styling Assistant"
+    location: null
+    dates: "March 2026"
+    bullets:
+      - id: outfitted_1
+        text: "gpt-4o vision classifies each uploaded item: category, subcategory, color, occasion, season — strict JSON-only prompt, validated against enum whitelists, retry up to 2x on invalid response"
+        tags: ["GPT-4o vision", "OpenAI API"]
+        core_action: "Built AI auto-classification for wardrobe items"
+      - id: outfitted_2
+        text: "rembg removes background before Cloudinary upload for clean collage rendering"
+        tags: [rembg, Cloudinary]
+        core_action: "Added background removal before upload"
+      - id: outfitted_3
+        text: "text-embedding-3-small embedding generated from classification, stored in wardrobe_items.embedding vector(1536) (pgvector)"
+        tags: ["text-embedding-3-small", pgvector, PostgreSQL]
+        core_action: "Built embedding pipeline for wardrobe items"
+      - id: outfitted_4
+        text: "gpt-4o-mini with JSON schema validation classifies each user message using last 4 conversation turns, extracting request_type, is_vague, occasion, formality, weather_sensitivity, categories_needed, specific_items_mentioned"
+        tags: ["GPT-4o-mini", "OpenAI API"]
+        core_action: "Built intent-extraction service"
+      - id: outfitted_5
+        text: "Vague requests short-circuit to clarification question before hitting retrieval"
+        tags: ["conversation design"]
+        core_action: "Built clarification short-circuit for vague requests"
+      - id: outfitted_6
+        text: "Builds context-enriched query from intent fields + user profile (gender, body type, fit, style vibes) + raw message — embeds with text-embedding-3-small"
+        tags: ["text-embedding-3-small", RAG]
+        core_action: "Built context-enriched retrieval query construction"
+      - id: outfitted_7
+        text: "pgvector cosine similarity search via match_wardrobe_items_v2 Supabase RPC (<=> operator), user-scoped, top-k=20"
+        tags: [pgvector, Supabase, RAG]
+        core_action: "Built pgvector cosine-similarity retrieval"
+      - id: outfitted_8
+        text: "Category gap-fill: if required categories absent from primary retrieval, runs targeted secondary RPC per missing category"
+        tags: [RAG, Supabase]
+        core_action: "Built category gap-fill retrieval fallback"
+      - id: outfitted_9
+        text: "Weather → season filter: warm→summer, cold/chilly/rainy→fall/winter"
+        tags: ["business logic"]
+        core_action: "Built weather-to-season filter logic"
+      - id: outfitted_10
+        text: "Retrieval starvation fallback: <8 results or missing tops/bottoms/shoes → full wardrobe passed to LLM"
+        tags: [RAG, "GPT-4o"]
+        core_action: "Built retrieval-starvation fallback"
+      - id: outfitted_11
+        text: "Post-retrieval: merges full accessories + jewelry inventory regardless of similarity score"
+        tags: [RAG]
+        core_action: "Built accessories/jewelry inventory merge step"
+      - id: outfitted_12
+        text: "Dynamic system prompt: wardrobe formatted as \"Item {i}: {color} {subcategory} ({category}, {occasion}, {season})\" + profile block injected per request"
+        tags: ["GPT-4o", "prompt engineering"]
+        core_action: "Built dynamic per-request system prompt"
+      - id: outfitted_13
+        text: "gpt-4o streaming via SSE; chunks accumulated from delta.content"
+        tags: ["GPT-4o", "Server-Sent Events"]
+        core_action: "Built streaming AI response via SSE"
+      - id: outfitted_14
+        text: "Model outputs structured blocks: OUTFIT_START / LABEL / TOP / BOTTOM / SHOES / ACCESSORIES / JEWELRY / OUTFIT_END"
+        tags: ["GPT-4o", "structured output"]
+        core_action: "Designed structured outfit-block output format"
+      - id: outfitted_15
+        text: "Regex parses outfit blocks from stream; fuzzy word-overlap scoring matches model descriptions to actual wardrobe item image URLs"
+        tags: [regex, "fuzzy matching"]
+        core_action: "Built regex parser + fuzzy-matching for outfit blocks"
+      - id: outfitted_16
+        text: "OUTFIT_IMAGES JSON payload appended to stream → frontend renders 5-slot collage per outfit"
+        tags: [React, "Server-Sent Events"]
+        core_action: "Built 5-slot outfit collage rendering"
+      - id: outfitted_17
+        text: "6-step onboarding: gender, height, body type, fit preference, style vibes, occasions, skin tone, colors, budget → user_profiles table, hydrates on edit"
+        tags: [React, Supabase]
+        core_action: "Built 6-step onboarding flow"
+      - id: outfitted_18
+        text: "Supabase Auth JWT frontend; backend validates Bearer token per request"
+        tags: ["Supabase Auth", JWT, FastAPI]
+        core_action: "Implemented Supabase JWT auth end-to-end"
+      - id: outfitted_19
+        text: "Tested by 10 users who uploaded 50-100 wardrobe items each, 500+ items total across the app"
+        tags: []
+        core_action: "Validated with 10 test users, 500+ items uploaded"
+      - id: outfitted_20
+        text: "Orchestrated four OpenAI models in one pipeline: gpt-4o vision for tagging, gpt-4o-mini for intent, gpt-4o for chat, text-embedding-3-small for retrieval"
+        tags: ["GPT-4o vision", "GPT-4o-mini", "GPT-4o", "text-embedding-3-small", "OpenAI API"]
+        core_action: "Orchestrated four OpenAI models across one pipeline"
+
+  - id: mock_interviewer
+    type: project
+    company: null
+    role: "Real-Time AI Mock Interviewer"
+    location: null
+    dates: "February 2026"
+    bullets:
+      - id: mock_interviewer_1
+        text: "Delivered full voice-to-code interview pipeline in 24 hours by orchestrating 3 external APIs over single WebSocket connection, later used by 100+ students at the university level"
+        tags: [WebSockets, ElevenLabs, "Google Gemini", "Twelve Labs"]
+        core_action: "Built voice-to-code interview pipeline in 24-hour hackathon"
+      - id: mock_interviewer_2
+        text: "Prevented concurrent response corruption by implementing backend lock ensuring one AI response in-flight at a time"
+        tags: ["Node.js", concurrency]
+        core_action: "Built backend lock to prevent concurrent AI response corruption"
+      - id: mock_interviewer_3
+        text: "Achieved real-time code visibility by streaming editor state alongside audio enabling contextual AI follow-up per utterance"
+        tags: [WebSockets, "Google Gemini"]
+        core_action: "Streamed editor state for contextual AI follow-up"
+
+  - id: flight_fare_prediction
+    type: project
+    company: null
+    role: "Flight Fare Prediction — ML Regression"
+    location: null
+    dates: "December 2025"
+    bullets:
+      - id: flight_fare_1
+        text: "Predicted Indian domestic flight fares with 82% R² by engineering 12 features from raw datetime/string columns and tuning Random Forest via RandomizedSearchCV across 5 hyperparameters on 13,000+ records"
+        tags: [Python, "scikit-learn", "Random Forest", "RandomizedSearchCV"]
+        core_action: "Built ML pipeline predicting flight fares at 82% R²"
+      - id: flight_fare_2
+        text: "Improved baseline Random Forest R² from 80% to 82% through 3-fold cross-validated hyperparameter search (n_estimators=200, max_depth=15); benchmarked against KNN (59%) and Decision Tree (66%)"
+        tags: [Python, "scikit-learn", "cross-validation"]
+        core_action: "Tuned and benchmarked Random Forest against KNN/Decision Tree"
+      - id: flight_fare_3
+        text: "Cleaned and feature-engineered 13,000+ flight records in pandas — parsed duration strings, extracted datetime components, corrected edge-case malformed entries — reducing nulls to zero before modeling"
+        tags: [Python, pandas, "data cleaning"]
+        core_action: "Cleaned and feature-engineered 13,000+ records"
+
+  - id: music_player_system
+    type: project
+    company: null
+    role: "Music Player System"
+    location: null
+    dates: "August 2025"
+    bullets:
+      - id: music_player_1
+        text: "WebSocket-based playback core achieving sub-200ms playback parity across multiple concurrent devices"
+        tags: [WebSockets, "Spring Boot", Java]
+        core_action: "Built WebSocket playback core with sub-200ms parity"
+      - id: music_player_2
+        text: "Integrated Permit.io for policy-as-code authorization, securing 6+ discrete actions across song and playlist resources, cutting custom authorization logic"
+        tags: ["Permit.io", authorization]
+        core_action: "Integrated Permit.io policy-as-code authorization"
+      - id: music_player_3
+        text: "Event-driven queue system synchronizing 100+ real-time state updates per minute for non-blocking client sync"
+        tags: [WebSockets, "event-driven architecture"]
+        core_action: "Built event-driven queue for real-time state sync"
