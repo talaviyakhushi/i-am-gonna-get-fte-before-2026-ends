@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import type { JobPayload } from "@resume-tailor/shared";
+import { slugify, type JobPayload } from "@resume-tailor/shared";
 import { getConfig } from "../config.js";
 import {
   appendEvent,
@@ -73,18 +73,6 @@ function safeConfig(): ReturnType<typeof getConfig> | undefined {
   } catch {
     return undefined;
   }
-}
-
-/**
- * Lowercase, hyphen-joined slug per the old SKILL.md convention: strip legal
- * suffixes (Inc/LLC/Ltd), collapse non-alphanumeric runs to a single hyphen.
- */
-export function slugify(input: string): string {
-  return input
-    .replace(/\b(inc|llc|ltd)\.?\b/gi, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
 }
 
 /** Emits a synthetic "assistant"-style narration event — keeps the event log meaningful now that there's no tool-loop transcript to relay. */

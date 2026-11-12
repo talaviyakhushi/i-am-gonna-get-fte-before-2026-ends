@@ -65,7 +65,7 @@ export function locationIsUS(location: string): boolean {
   return !NON_US.test(location);
 }
 
-export const MAX_AGE_DAYS = 30;
+export const MAX_AGE_DAYS = 60;
 
 export function isFresh(postedAt: string | null): boolean {
   if (!postedAt) return true;

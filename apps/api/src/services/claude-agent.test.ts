@@ -193,12 +193,3 @@ describe("startAgentRun", () => {
     expect(run.error).toContain("ENOENT");
   });
 });
-
-describe("slugify", () => {
-  it("lowercases, hyphenates, and strips legal suffixes", async () => {
-    const { slugify } = await import("./claude-agent.js");
-    expect(slugify("Acme Corp Inc.")).toBe("acme-corp");
-    expect(slugify("Senior Software Engineer")).toBe("senior-software-engineer");
-    expect(slugify("Wipro Limited")).toBe("wipro-limited");
-  });
-});

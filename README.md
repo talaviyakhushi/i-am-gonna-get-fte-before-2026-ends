@@ -1,12 +1,16 @@
 # resume-tailor-agent
 
-Personal tool that tailors your markdown resume to a job posting using the
-Claude Agent SDK, then opens a PR on your resume repo.
+Personal job-search toolkit:
+
+- **Resume tailor.** A Chrome extension captures a job posting. A local API
+  tailors your resume to it with Claude and saves a LaTeX file.
+- **Job scanner.** Pulls new grad postings from company job boards
+  (Greenhouse, Lever, Ashby) and emails a daily digest.
 
 ```
-Chrome extension ──► local API (Express) ──► Claude Agent SDK edits a cloned
-(capture posting)    (orchestrator)          copy of your resume repo
-                                             └► git push + GitHub PR (Octokit)
+Chrome extension ──► local API (Express) ──► tailoring pipeline (Claude Messages API)
+(capture posting)    (orchestrator, SSE)     └► tailored-resumes/{date}/{company}/{role}/tailored-resume.tex
+                                             └► tailored-resumes/applications-tracker.csv
 ```
 
 ## Layout
@@ -14,15 +18,18 @@ Chrome extension ──► local API (Express) ──► Claude Agent SDK edits 
 | Path | What |
 |---|---|
 | `packages/shared` | Shared types, `validateJobPayload`, `slugify` |
-| `apps/api` | Local Express server: `/runs` orchestration, SSE progress, honesty check |
-| `apps/extension` | Chrome MV3 extension: capture posting, confirm, live progress, PR link |
-| `example-resume-repo` | Template for your separate resume repo (incl. `SKILL.md`) |
-| `docs/TESTING.md` | Setup + manual E2E runbook |
+| `apps/api` | Local Express server: `/runs` orchestration, SSE progress, tailoring pipeline |
+| `apps/extension` | Chrome MV3 extension: capture posting, confirm, live progress |
+| `example-resume-repo` | Resume source: `profile.yaml` (all experience bullets) and `templates/resume-template.tex`. Separate git repo, ignored here. |
+| `job-scanner` | Daily new grad job scan, filters, and filter evals |
+| `tailored-resumes` | Output: one folder per tailored resume, plus the applications tracker |
+| `docs/TESTING.md` | Setup, smoke tests, and manual E2E runbook |
 
 ## Quick start
 
 ```sh
 pnpm install
+pnpm --filter @resume-tailor/shared build   # API and extension import the built package
 pnpm typecheck && pnpm test
 
 # API
@@ -34,25 +41,66 @@ pnpm --filter @resume-tailor/extension dev
 # chrome://extensions → Load unpacked → apps/extension/dist
 ```
 
-Full setup, curl smoke tests, and the E2E runbook: [docs/TESTING.md](docs/TESTING.md).
+## How a tailoring run works
 
-## How a run works
+1. `POST /runs` validates the confirmed job payload, rejects a second run while
+   one is active (409), and returns `202 {runId}`.
+2. **Early exits:**
+   - Postings that rule out visa sponsorship → status `blocked`.
+   - Postings whose JSON-LD `datePosted` is more than 14 days old → status
+     `stale`. The popup can retry with `force: true`.
+3. The pipeline in `apps/api/src/services/tailoring-pipeline.ts`:
+   1. **Extract signals.** Claude pulls primary/secondary tech and other
+      signals from the job description.
+   2. **Select bullets.** Scores every bullet in `profile.yaml` against those
+      signals and picks 2–3 per role, plus spares (no model call).
+   3. **Rephrase.** Claude rewrites the picked bullets toward the job's
+      wording. It must not add new facts.
+   4. **Audit and compile:**
+      - Claude fact-checks each rewrite against its original.
+      - Code checks length, line fill, and banned topics.
+      - Failing bullets are corrected or reverted to the original. Unusable
+        ones are dropped and replaced from spares, never invented.
+      - Then the summary, skills, and stack lines are built and filled into
+        the LaTeX template.
+4. The `.tex` file is saved under `tailored-resumes/` and a row is appended to
+   `applications-tracker.csv`. Warnings (reverted bullets, missing metrics,
+   short roles) come back in the run result.
+5. The popup streams progress from `GET /runs/:id/events` (SSE). Output files
+   can be downloaded from `GET /runs/:id/files/<path>`.
 
-1. `POST /runs` validates the confirmed job payload, locks the repo, returns `202 {runId}`.
-2. The agent service clones your resume repo (depth 1) into a tmp dir, creates
-   `resume/{company}-{title}-{shortId}`, and runs the Claude Agent SDK
-   (`claude-sonnet-5`, tools: Read/Write/Edit/Bash/Grep/Glob) with a prompt that
-   points at `.claude/skills/tailor-resume/SKILL.md` in your repo.
-3. After the loop, an honesty check scans the diff for metrics/claims absent
-   from your original resume — warnings surface in the PR body and popup, but
-   never block.
-4. Commit, push, open PR via Octokit, report `{prUrl, branch, filesChanged}`,
-   clean up the tmp clone.
-5. The extension popup streams progress from `GET /runs/:id/events` (SSE).
+Model calls use structured tool output (`tool_choice`), not free-text JSON.
+The pipeline is built for one resume layout: three work roles and one project
+(`CORE_ROLE_IDS` and the template placeholders).
+
+## Job scanner
+
+```sh
+pnpm scan-jobs                                # scan, write results + seen.json, email digest
+npx tsx job-scanner/scan.ts --dry-run         # print only, no writes, no email
+npx tsx job-scanner/scan.ts --no-email        # write results, skip email
+```
+
+- Companies come from `job-scanner/companies.json`.
+- Filters in `job-scanner/filters.ts`:
+  - Software role with a new grad/entry-level signal.
+  - US location.
+  - Posted within 60 days.
+  - Description doesn't ask for 3+ years.
+- New matches go to `job-scanner/results/{date}.md`. `seen.json` prevents
+  repeats.
+- Email needs `job-scanner/.env` (copy `.env.example`; uses a Gmail app
+  password).
+
+Filter evals: `npx tsx job-scanner/evals/run_eval.ts` scores the title and
+location filters against hand-labeled postings in `evals/filter_labels.jsonl`.
+Add real mistakes there when you find them.
 
 ## Security notes
 
-- All secrets in `apps/api/.env` (gitignored); never bundled into the extension.
-- `/runs` requires the `X-Resume-Agent-Token` shared secret; CORS restricted to
-  `API_ORIGIN_ALLOWLIST`.
-- Error messages are sanitized (tokens, keys, tmp paths stripped) before storage.
+- All secrets live in `apps/api/.env` and `job-scanner/.env` (gitignored).
+  They are never bundled into the extension.
+- `/runs` requires the `X-Resume-Agent-Token` shared secret, compared in
+  constant time. CORS is restricted to `API_ORIGIN_ALLOWLIST`.
+- Error messages are sanitized (API key, auth token, tmp paths stripped)
+  before storage.

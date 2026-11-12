@@ -69,6 +69,12 @@ describe("slugify", () => {
     expect(slugify("Café Zoë")).toBe("cafe-zoe");
   });
 
+  it("strips legal suffixes", () => {
+    expect(slugify("Acme Corp Inc.")).toBe("acme-corp");
+    expect(slugify("Foo LLC")).toBe("foo");
+    expect(slugify("Wipro Limited")).toBe("wipro-limited");
+  });
+
   it("handles empty result", () => {
     expect(slugify("!!!")).toBe("");
   });
